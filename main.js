@@ -3,7 +3,6 @@ const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const msg = document.querySelector('.msg');
 const userList = document.querySelector('#users');
-// console.log(localStorage)
 myForm.addEventListener('submit', onSubmit);
 function onSubmit(e) {
   e.preventDefault();
@@ -12,18 +11,12 @@ function onSubmit(e) {
     msg.innerHTML = 'Please enter all fields';
     setTimeout(() => msg.remove(), 3000);
   } else {
-    // const li = document.createElement('li');
-    // li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
     let myObject={
       name:nameInput.value,
       email:emailInput.value,
     };
     let myObj=JSON.stringify(myObject)
     localStorage.setItem('myObj',myObj)
-    // localStorage.setItem('name',nameInput.value)
-    // localStorage.setItem('email',emailInput.value)
-    // console.log(typeof localStorage.getItem('name'))
-    // userList.appendChild(li);
     console.log(localStorage)
     nameInput.value = '';
     emailInput.value = '';
