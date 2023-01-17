@@ -3,7 +3,7 @@ const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const msg = document.querySelector('.msg');
 const userList = document.querySelector('#users');
-console.log(localStorage)
+// console.log(localStorage)
 myForm.addEventListener('submit', onSubmit);
 function onSubmit(e) {
   e.preventDefault();
