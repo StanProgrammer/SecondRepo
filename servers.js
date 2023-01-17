@@ -7,8 +7,14 @@ myForm.addEventListener('submit', onSubmit);
 function onSubmit(e) {
   e.preventDefault();
     const li = document.createElement('li');
+    const btn=document.createElement('input')
+    btn.value='Delete';
+    btn.type='button'
+    btn.appendChild(document.createTextNode('delete'))
     li.appendChild(document.createTextNode(`${nameInput.value}-${emailInput.value}-${phoneInput.value}`));
     userList.appendChild(li);
+    li.appendChild(btn);
+
     let myObject={
       name:nameInput.value,
       email:emailInput.value,
@@ -22,4 +28,18 @@ function onSubmit(e) {
     phoneInput.value = '';
 
   }
+
+  var itemList=document.getElementById('users')
+  itemList.addEventListener('click',removeItem)
+  function removeItem(e){
+    if(e.target.type==='button'){
+        if(confirm('Are you sure?')){
+            var li=e.target.parentElement;
+            a=li.textContent
+            const myArray=a.split('-')
+            localStorage.removeItem(myArray[1]);
+            itemList.removeChild(li)
+        }
+    }
+}
 
