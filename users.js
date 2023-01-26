@@ -62,5 +62,4 @@ function onSubmit(e) {
             itemList.removeChild(li)
 
     }
-}///
-
+}
