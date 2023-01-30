@@ -13,7 +13,7 @@ function onSubmit(e) {
     };
 
     axios
-  .post('https://crudcrud.com/api/7e4e50ebc906450b8b9a33320a24c571/userData',{myObject})
+  .post('https://crudcrud.com/api/aad7ba5612784ec7b3de18be2b03b186/userData',{myObject})
   .then(res=>showOutput(res))
   .catch((err)=>{
     document.body.innerHTML=document.body.innerHTML+"<h4>Something went Wrong<h4>"
@@ -69,9 +69,10 @@ function onSubmit(e) {
     li.appendChild(btn);
     li.appendChild(edit);
   }
-  function getTodos() {
+  window.addEventListener('DOMContentLoaded', (event) => {
+    function getTodos() {
     axios
-    .get('https://crudcrud.com/api/7e4e50ebc906450b8b9a33320a24c571/userData')
+    .get('https://crudcrud.com/api/aad7ba5612784ec7b3de18be2b03b186/userData')
     .then(res=>showAll(res))
     .catch(err=>console.log(err))
   }
@@ -98,3 +99,4 @@ function onSubmit(e) {
     li.appendChild(btn);
     li.appendChild(edit);
   }
+  });
