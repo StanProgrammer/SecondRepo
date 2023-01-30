@@ -46,10 +46,13 @@ function onSubmit(e) {
               }
               axios
               .delete(`https://crudcrud.com/api/797c46e2221042e39f4997a82d1120bf/userData/${a}`)
-              .then(res=>console.log(res))
+              .then((res)=>{
+                 itemList.removeChild(li)
+              })
+              .catch(err=>alert('Not Found'))
             })
             .catch(err=>console.log(err))
-            itemList.removeChild(li)
+            // itemList.removeChild(li)
         }
     }
   }
