@@ -13,7 +13,7 @@ function onSubmit(e) {
     };
 
     axios
-  .post('https://crudcrud.com/api/aad7ba5612784ec7b3de18be2b03b186/userData',{myObject})
+  .post('https://crudcrud.com/api/797c46e2221042e39f4997a82d1120bf/userData',{myObject})
   .then(res=>showOutput(res))
   .catch((err)=>{
     document.body.innerHTML=document.body.innerHTML+"<h4>Something went Wrong<h4>"
@@ -32,8 +32,23 @@ function onSubmit(e) {
         if(confirm('Are you sure?')){
             var li=e.target.parentElement;
             a=li.textContent
-            const myArray=a.split('-')
-            localStorage.removeItem(myArray[1]);
+            const myarr=a.split('-')
+            b=myarr[1]
+            axios
+            .get('https://crudcrud.com/api/797c46e2221042e39f4997a82d1120bf/userData')
+            .then((res)=>{
+              //email id is chosen to fetch _id because email id is unique
+              for(i=0;i<res.data.length;i++){
+                if(b===res.data[i].myObject.email){
+                  a=res.data[i]._id
+                  break
+                }
+              }
+              axios
+              .delete(`https://crudcrud.com/api/797c46e2221042e39f4997a82d1120bf/userData/${a}`)
+              .then(res=>console.log(res))
+            })
+            .catch(err=>console.log(err))
             itemList.removeChild(li)
         }
     }
@@ -72,7 +87,7 @@ function onSubmit(e) {
   window.addEventListener('DOMContentLoaded', (event) => {
     function getTodos() {
     axios
-    .get('https://crudcrud.com/api/aad7ba5612784ec7b3de18be2b03b186/userData')
+    .get('https://crudcrud.com/api/797c46e2221042e39f4997a82d1120bf/userData')
     .then(res=>showAll(res))
     .catch(err=>console.log(err))
   }
