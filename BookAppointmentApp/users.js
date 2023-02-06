@@ -11,7 +11,6 @@ function onSubmit(e) {
       email:emailInput.value,
       phonenumber:phoneInput.value,
     };
-
     axios
   .post('https://crudcrud.com/api/de78644cf8414d409999c9204b8c3302/userData',{myObject})
   .then(res=>showOutput(res))
