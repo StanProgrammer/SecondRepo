@@ -12,8 +12,8 @@ function onSubmit(e) {
       phonenumber:phoneInput.value,
     };
     axios
-  .post('https://crudcrud.com/api/de78644cf8414d409999c9204b8c3302/userData',{myObject})
-  .then(res=>showOutput(res))
+  .post('https://crudcrud.com/api/b37c094a13234c048c8d2b69940c6d58/userData',{myObject})
+  .then(res=>show1(myObject))
   .catch((err)=>{
     document.body.innerHTML=document.body.innerHTML+"<h4>Something went Wrong<h4>"
     console.log(err)
@@ -52,30 +52,15 @@ function onSubmit(e) {
     }
 
   }
-  function showOutput(res) {
-    const li = document.createElement('li');
-    const btn=document.createElement('input')
-    btn.value='Delete';
-    btn.type='button'
-    btn.appendChild(document.createTextNode('delete'))
-
-    const edit=document.createElement('input')
-    edit.value='Edit';
-    edit.type='button'
-    edit.appendChild(document.createTextNode('edit'))
-    li.appendChild(document.createTextNode(`${res.data.myObject.name}-${res.data.myObject.email}-${res.data.myObject.phonenumber}`));
-    userList.appendChild(li);
-    li.appendChild(btn);
-    li.appendChild(edit);
-  }
-  function getTodos() {
+  window.addEventListener('DOMContentLoaded', (event) => {
+    function getTodos() {
     axios
-    .get('https://crudcrud.com/api/de78644cf8414d409999c9204b8c3302/userData')
+    .get('https://crudcrud.com/api/b37c094a13234c048c8d2b69940c6d58/userData')
     .then(res=>showAll(res))
     .catch(err=>console.log(err))
   }
   getTodos()
-
+  })
   function showAll(res){
     for(i=0;i<res.data.length;i++){
       show1(res.data[i].myObject)
@@ -97,3 +82,4 @@ function onSubmit(e) {
     li.appendChild(btn);
     li.appendChild(edit);
   }
+  
