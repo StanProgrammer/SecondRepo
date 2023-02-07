@@ -12,7 +12,7 @@ function onSubmit(e) {
       phonenumber:phoneInput.value,
     };
     axios
-  .post('https://crudcrud.com/api/b37c094a13234c048c8d2b69940c6d58/userData',{myObject})
+  .post('https://crudcrud.com/api/f22e5d5956d0486a931a9d8520709be7/userData',{myObject})
   .then(res=>show1(myObject))
   .catch((err)=>{
     document.body.innerHTML=document.body.innerHTML+"<h4>Something went Wrong<h4>"
@@ -31,9 +31,27 @@ function onSubmit(e) {
         if(confirm('Are you sure?')){
             var li=e.target.parentElement;
             a=li.textContent
-            const myArray=a.split('-')
-            localStorage.removeItem(myArray[1]);
-            itemList.removeChild(li)
+            const myarr=a.split('-')
+            b=myarr[1]
+            axios
+            .get('https://crudcrud.com/api/f22e5d5956d0486a931a9d8520709be7/userData')
+            .then((res)=>{
+              // email id is chosen to fetch _id because email id is unique
+              for(i=0;i<res.data.length;i++){
+                if(b===res.data[i].myObject.email){
+                  res.data[i].myObject
+                  a=res.data[i]._id
+                  break
+                }
+              }
+              axios
+              .delete(`https://crudcrud.com/api/f22e5d5956d0486a931a9d8520709be7/userData/${a}`)
+              .then((res)=>{
+                 itemList.removeChild(li)
+              })
+              .catch(err=>alert('Not Found'))
+            })
+            .catch(err=>console.log(err))
         }
     }
   }
@@ -55,7 +73,7 @@ function onSubmit(e) {
   window.addEventListener('DOMContentLoaded', (event) => {
     function getTodos() {
     axios
-    .get('https://crudcrud.com/api/b37c094a13234c048c8d2b69940c6d58/userData')
+    .get('https://crudcrud.com/api/f22e5d5956d0486a931a9d8520709be7/userData')
     .then(res=>showAll(res))
     .catch(err=>console.log(err))
   }
@@ -63,10 +81,11 @@ function onSubmit(e) {
   })
   function showAll(res){
     for(i=0;i<res.data.length;i++){
-      show1(res.data[i].myObject)
+      show1(res.data[i].myObject,res.data[i]._id)
     }
   }
-  function show1(res) {
+  function show1(res,id) {
+    // console.log(id)
     const li = document.createElement('li');
     const btn=document.createElement('input')
     btn.value='Delete';
