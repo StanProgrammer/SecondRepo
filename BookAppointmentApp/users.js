@@ -12,7 +12,7 @@ function onSubmit(e) {
       phonenumber:phoneInput.value,
     };
     axios
-  .post('https://crudcrud.com/api/f22e5d5956d0486a931a9d8520709be7/userData',{myObject})
+  .post('https://crudcrud.com/api/c8273a3d09064b649ea38298e37c03d9/userData',{myObject})
   .then(res=>show1(myObject))
   .catch((err)=>{
     document.body.innerHTML=document.body.innerHTML+"<h4>Something went Wrong<h4>"
@@ -34,7 +34,7 @@ function onSubmit(e) {
             const myarr=a.split('-')
             b=myarr[1]
             axios
-            .get('https://crudcrud.com/api/f22e5d5956d0486a931a9d8520709be7/userData')
+            .get('https://crudcrud.com/api/c8273a3d09064b649ea38298e37c03d9/userData')
             .then((res)=>{
               // email id is chosen to fetch _id because email id is unique
               for(i=0;i<res.data.length;i++){
@@ -44,8 +44,9 @@ function onSubmit(e) {
                   break
                 }
               }
+              
               axios
-              .delete(`https://crudcrud.com/api/f22e5d5956d0486a931a9d8520709be7/userData/${a}`)
+              .delete(`https://crudcrud.com/api/c8273a3d09064b649ea38298e37c03d9/userData/${a}`)
               .then((res)=>{
                  itemList.removeChild(li)
               })
@@ -63,17 +64,36 @@ function onSubmit(e) {
             const myArray=a.split('-')
             nameInput.value = myArray[0];
             emailInput.value = myArray[1];
-            phoneInput.value = myArray[2];
-            localStorage.removeItem(myArray[1]);
-            itemList.removeChild(li)
-
+            phoneInput.value = myArray[2].slice(0,10);
+            
+            var li=e.target.parentElement;
+            a=li.textContent
+            const myarr=a.split('-')
+            b=myarr[1]
+            axios
+            .get('https://crudcrud.com/api/c8273a3d09064b649ea38298e37c03d9/userData')
+            .then((res)=>{
+              //email id is chosen to fetch _id because email id is unique
+              for(i=0;i<res.data.length;i++){
+                if(b===res.data[i].myObject.email){
+                  a=res.data[i]._id
+                  break
+                }
+              }
+              axios
+              .delete(`https://crudcrud.com/api/c8273a3d09064b649ea38298e37c03d9/userData/${a}`)
+              .then((res)=>{
+                 itemList.removeChild(li)
+              })
+              .catch(err=>alert('Not Found'))
+            })
+            .catch(err=>console.log(err))
     }
-
   }
   window.addEventListener('DOMContentLoaded', (event) => {
     function getTodos() {
     axios
-    .get('https://crudcrud.com/api/f22e5d5956d0486a931a9d8520709be7/userData')
+    .get('https://crudcrud.com/api/c8273a3d09064b649ea38298e37c03d9/userData')
     .then(res=>showAll(res))
     .catch(err=>console.log(err))
   }
@@ -102,3 +122,5 @@ function onSubmit(e) {
     li.appendChild(edit);
   }
   
+  
+
