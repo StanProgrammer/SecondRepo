@@ -65,7 +65,7 @@ function onSubmit(e) {
             nameInput.value = myArray[0];
             emailInput.value = myArray[1];
             phoneInput.value = myArray[2].slice(0,10);
-            
+            //a93c3d51e792a360ffc45f7ac418a996326afafc
             var li=e.target.parentElement;
             a=li.textContent
             const myarr=a.split('-')
