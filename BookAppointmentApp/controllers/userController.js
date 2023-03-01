@@ -27,11 +27,10 @@ exports.postNewUser = (req, res, next) => {
         email : email
     })
     .then(result => {
-        console.log(result);
         res.redirect('/');
     })
-    .catch(error => {
-        console.log(error);
+    .catch(err => {
+        console.log(err);
     })
 };
 
